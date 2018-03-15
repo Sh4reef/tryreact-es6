@@ -6,7 +6,6 @@ import { render } from 'react-dom';
 import {Provider} from 'react-redux';
 
 import configureStore from './stores/configure_store';
-
 import App from './app';
 import routes from './routes';
 
