@@ -1,0 +1,28 @@
+{
+  "name": "try-react-es6",
+  "version": "1.0.0",
+  "description": "Learning, Testing with React",
+  "keywords": [],
+  "homepage": "https://codesandbox.io/s/new",
+  "main": "src/index.js",
+  "dependencies": {
+    "bootstrap": "4.0.0",
+    "jquery": "3.3.1",
+    "popper.js": "1.14.1",
+    "prop-types": "15.6.1",
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
+    "react-redux": "latest",
+    "react-router-dom": "4.2.2",
+    "react-scripts": "1.1.0",
+    "redux": "latest",
+    "redux-immutable-state-invariant": "2.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
