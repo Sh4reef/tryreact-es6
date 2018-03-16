@@ -8,10 +8,12 @@ import {Provider} from 'react-redux';
 import configureStore from './stores/configure_store';
 import App from './app';
 import routes from './routes';
+import {loadAuthors} from './actions/author_actions';
 import {loadCourses} from './actions/course_actions';
 
 const store = configureStore();
 store.dispatch(loadCourses())
+store.dispatch(loadAuthors())
 
 render(
   <Provider store={store}>
