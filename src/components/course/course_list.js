@@ -1,8 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import Spinner from 'react-spinkit';
 
-const CourseList = ({courses}) => {
+
+const spinnerStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)'
+}
+
+const CourseList = ({courses, loading}) => {
+  const createSpinner = () => {
+    return (
+      <Spinner fadeIn="none" style={spinnerStyle} />
+    )
+  }
   const createCourseRow = (course, index) => {
     return (
       courses.map((course, index) => {
@@ -18,8 +32,8 @@ const CourseList = ({courses}) => {
       })
     )
   }
-  return (
-    <div className="courses">
+  const createCoursesTable = () => {
+    return (
       <table className="table">
         <thead>
           <tr>
@@ -31,16 +45,21 @@ const CourseList = ({courses}) => {
           </tr>
         </thead>
         <tbody>
-            {createCourseRow(courses)}
+          {createCourseRow(courses)}
         </tbody>
       </table>
-      
+    )
+  }
+  return (
+    <div className="courses">
+      {!loading ? createCoursesTable() : createSpinner()}
     </div>
   )
 }
 
 CourseList.propTypes = {
-  courses: PropTypes.array.isRequired
+  courses: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired
 }
 
 export default CourseList;

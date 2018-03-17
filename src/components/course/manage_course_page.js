@@ -3,6 +3,7 @@ import {Prompt} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import Spinner from 'react-spinkit';
 
 import * as courseActions from '../../actions/course_actions';
 import CourseForm from './course_form';
@@ -87,6 +88,12 @@ class ManageCoursePage extends React.Component {
   };
 
   render() {
+    const spinnerStyle = {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)'
+    }
     return (
       <div id="course-form">
         <Prompt
@@ -94,14 +101,18 @@ class ManageCoursePage extends React.Component {
               message={location => {
                 return location.pathname.startsWith('/course/save') ? true : 'Leaving without saving ?'
               }} />
-        <CourseForm
-          course={this.state.course}
-          allAuthors={this.props.authors}
-          onChange={this.setCourseState}
-          onRevert={this.revertState}
-          onSave={this.saveCourseState}
-          errors={this.state.errors}
-          submitted={this.state.submitted} />
+        {
+          !this.props.loading
+            ? <CourseForm
+              course={this.state.course}
+              allAuthors={this.props.authors}
+              onChange={this.setCourseState}
+              onRevert={this.revertState}
+              onSave={this.saveCourseState}
+              errors={this.state.errors}
+              submitted={this.state.submitted} />
+            : <Spinner fadeIn="none" style={spinnerStyle} />
+        }
       </div>
     );
   };
@@ -110,7 +121,8 @@ class ManageCoursePage extends React.Component {
 ManageCoursePage.propTypes = {
   course: PropTypes.object,
   authors: PropTypes.array,
-  actions: PropTypes.object
+  actions: PropTypes.object,
+  loading: PropTypes.bool
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -137,7 +149,8 @@ const mapStateToProps = (state, ownProps) => {
   });
   return {
     course: course,
-    authors: authorsFormattedForDropdown
+    authors: authorsFormattedForDropdown,
+    loading: state.ajaxCallsInProgress > 0
   }
 }
 

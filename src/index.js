@@ -1,5 +1,6 @@
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
+import '../public/style.css';
 
 import React from 'react';
 import { render } from 'react-dom';

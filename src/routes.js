@@ -17,9 +17,7 @@ export default (
     <Route path="/about" component={AboutPage} />
     <Route path="/courses" component={CoursePage} />
     <Route exact path="/course" component={ManageCoursePage} />
-    <Route path="/course/save" render={location => {
-      return <Redirect to="/courses" />
-    }} />
+    <Redirect from="/course/save" to="/courses" />
     <Route path="/course/:id" component={ManageCoursePage} />
     <Route component={PageNotFound} />
   </Switch>
